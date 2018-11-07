@@ -2,16 +2,36 @@
   "name": "react-desktop-demo",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
+  "build": {
+    "files": [
+      "build/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "main": "src/electron.js",
+  "homepage": ".",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^4.0.1",
+    "cross-env": "^5.2.0",
+    "electron": "^3.0.4",
+    "electron-builder": "^20.28.4",
+    "electron-devtools-installer": "^2.2.4",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-scripts": "2.0.4"
+    "react-scripts": "2.0.4",
+    "wait-on": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepack": "yarn run build",
+    "pack": "electron-builder -w",
+    "electron": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": "react-app"
